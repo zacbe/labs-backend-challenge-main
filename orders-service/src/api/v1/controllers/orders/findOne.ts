@@ -9,11 +9,9 @@ export default async function handler(req: Request, res: Response, next: NextFun
 
   try {
     const order = await findOrderById(orderId, models);
-    if (!order) {
-      return next(createError(404, 'Order not found'));
-    }
-    res.json({ order });
-  } catch (e) {
-    next(e);
+    if (!order) return next(createError(404, 'Order not found'));
+    res.status(200).json({ order });
+  } catch (e: any) {
+    next(createError(500, e.message));
   }
 }

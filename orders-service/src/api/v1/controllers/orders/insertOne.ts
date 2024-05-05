@@ -9,11 +9,9 @@ export default async function handler(req: Request, res: Response, next: NextFun
 
   try {
     const order = await insertOrder(body, models);
-    if (!order) {
-      return next(createError(500, 'Order could not be created'));
-    }
-    res.json({ message: order });
-  } catch (e) {
-    next(e);
+    if (!order) return next(createError(400, 'Order could not be created'));
+    res.status(201).json({ message: order });
+  } catch (e: any) {
+    next(createError(500, e.message));
   }
 }
