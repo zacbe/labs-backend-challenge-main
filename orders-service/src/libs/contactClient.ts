@@ -1,16 +1,17 @@
 import axios from 'axios';
 
 const getContacts = async (id: string): Promise<User | null> => {
-  const host = process.env.CONTACTS_SERVICE_HOST || 'localhost';
-  const port = process.env.CONTACTS_SERVICE_PORT || '8080';
+  const host = process.env.CONTACTS_SERVICE_HOST;
   const path = `api/v1/person/${id}`;
-  const url = `http://${host}:${port}/${path}`;
+  const url = `${host}/${path}`;
 
   try {
+    console.info({ url });
     const response = await axios.get<User>(url);
     return response.data;
   } catch (e: any) {
-    throw new Error(e);
+    console.error(`Error fetching contacts for user ${id}: ${e.message}`);
+    throw e;
   }
 };
 
