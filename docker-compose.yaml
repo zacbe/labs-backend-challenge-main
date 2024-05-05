@@ -1,15 +1,15 @@
 version: "3"
 services:
   zookeeper:
-    image: 'bitnami/zookeeper:latest'
+    image: "bitnami/zookeeper:latest"
     ports:
-      - '2181:2181'
+      - "2181:2181"
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
   kafka:
-    image: 'bitnami/kafka:latest'
+    image: "bitnami/kafka:latest"
     ports:
-      - '9093:9093'
+      - "9093:9093"
     environment:
       - KAFKA_BROKER_ID=1
       - KAFKA_LISTENERS=LOCAL://kafka:9093,REMOTE://kafka:9092
@@ -21,24 +21,33 @@ services:
     depends_on:
       - zookeeper
   mongodb:
-    image: 'mongo:latest'
+    image: "mongo:latest"
     ports:
       - "27017:27017"
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
   contact-service:
     build: contact-service/
-    command: 
-     - "--kafka.bootstrapServer=kafka:9092" 
-     - "--spring.data.mongodb.host=mongodb" 
-     - "--spring.data.mongodb.port=27017"
-     - "--api.maxArtificialLatency=0"
-     - "--dataload.numberOfPersons=10"
-     - "--spring.profiles.active=kafka"
+    command:
+      - "--kafka.bootstrapServer=kafka:9092"
+      - "--spring.data.mongodb.host=mongodb"
+      - "--spring.data.mongodb.port=27017"
+      - "--api.maxArtificialLatency=0"
+      - "--dataload.numberOfPersons=10"
+      - "--spring.profiles.active=kafka"
     ports:
       - 8080:8080
     depends_on:
       - zookeeper
       - kafka
       - mongodb
-
+  orders-service:
+    build: orders-service/
+    ports:
+      - 8081:8081
+    environment:
+      - CONTACT_SERVICE_HOST="http://contact-service:8080"
+    depends_on:
+      - zookeeper
+      - kafka
+      - contact-service
