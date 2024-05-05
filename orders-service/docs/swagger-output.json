@@ -13,10 +13,10 @@
   "paths": {
     "/api/v1/orders": {
       "post": {
-        "description": "",
+        "description": "This function creates a new order in the Database.",
         "responses": {
-          "default": {
-            "description": ""
+          "201": {
+            "description": "Order created"
           }
         },
         "requestBody": {
@@ -30,6 +30,58 @@
                   },
                   "userId": {
                     "example": "662fd536ea8c270e6fdadf65"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "This function retrieves all contracts from the Database.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "orderId": {
+                        "type": "string"
+                      },
+                      "user": {
+                        "type": "object",
+                        "properties": {
+                          "firstName": {
+                            "type": "string"
+                          },
+                          "lastName": {
+                            "type": "string"
+                          },
+                          "streetAddress": {
+                            "type": "string"
+                          },
+                          "houseNumber": {
+                            "type": "string"
+                          },
+                          "zip": {
+                            "type": "string"
+                          },
+                          "city": {
+                            "type": "string"
+                          },
+                          "country": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
                   }
                 }
               }
@@ -52,13 +104,27 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Order updated"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "example": "This is a new order"
+                  }
+                }
+              }
+            }
           }
         }
       },
       "get": {
-        "description": "",
+        "description": "This function retrieves a specific order from the Database.",
         "parameters": [
           {
             "name": "orderId",
@@ -70,13 +136,54 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "description": {
+                      "type": "string"
+                    },
+                    "orderId": {
+                      "type": "string"
+                    },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "firstName": {
+                          "type": "string"
+                        },
+                        "lastName": {
+                          "type": "string"
+                        },
+                        "streetAddress": {
+                          "type": "string"
+                        },
+                        "houseNumber": {
+                          "type": "string"
+                        },
+                        "zip": {
+                          "type": "string"
+                        },
+                        "city": {
+                          "type": "string"
+                        },
+                        "country": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
       "delete": {
-        "description": "",
+        "description": "This function deletes a specific order from the Database.",
         "parameters": [
           {
             "name": "orderId",
@@ -88,8 +195,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "204": {
+            "description": "Order deleted"
           }
         }
       }
