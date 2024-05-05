@@ -6,7 +6,6 @@ const getContacts = async (id: string): Promise<User | null> => {
   const url = `${host}/${path}`;
 
   try {
-    console.info({ url });
     const response = await axios.get<User>(url);
     return response.data;
   } catch (e: any) {

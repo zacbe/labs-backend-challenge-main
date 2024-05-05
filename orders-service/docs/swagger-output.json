@@ -92,7 +92,7 @@
     },
     "/api/v1/orders/{orderId}": {
       "put": {
-        "description": "",
+        "description": "This function updates a specific order in the Database.",
         "parameters": [
           {
             "name": "orderId",
