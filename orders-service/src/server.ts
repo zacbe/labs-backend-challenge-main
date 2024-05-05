@@ -13,6 +13,10 @@ const corsOptions = {
   origin: env.CORS_ORIGIN,
   credentials: true,
 };
+// initialize the squelize connection
+(async () => {
+  await sequelize.sync({ alter: true, force: false });
+})();
 
 const app: Express = express();
 
