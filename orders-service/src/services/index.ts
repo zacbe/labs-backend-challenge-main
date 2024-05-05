@@ -1,3 +1,3 @@
-import { deleteOrder, findOrderById, insertOrder, updateOrder } from './orderService';
+import { deleteOrder, findOrderById, findOrders, insertOrder, updateOrder } from './orderService';
 
-export { deleteOrder, findOrderById, insertOrder, updateOrder };
+export { deleteOrder, findOrderById, findOrders, insertOrder, updateOrder };

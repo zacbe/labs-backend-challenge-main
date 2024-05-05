@@ -31,8 +31,15 @@ async function insertOrder(body: OrderInput, models: Models): Promise<typeof Ord
     await order.setUser(userId);
     return order.toJSON();
   } catch (error: any) {
-    throw new Error(error);
+    console.error(`Error creating order: ${error.message}`);
+    throw error;
   }
+}
+
+async function findOrders(models: Models): Promise<Array<typeof Order>> {
+  const { Order } = models;
+  const orders = await Order.findAll();
+  return orders.map((order: typeof Order) => order.toJSON());
 }
 
 async function findOrderById(id: string, models: Models): Promise<typeof Order | null> {
@@ -70,4 +77,4 @@ async function updateOrder(id: string, body: Order, models: Models): Promise<Arr
   return Order.update({ description }, { where: { id } });
 }
 
-export { deleteOrder, findOrderById, insertOrder, updateOrder };
+export { deleteOrder, findOrderById, findOrders, insertOrder, updateOrder };

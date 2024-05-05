@@ -3,13 +3,6 @@ import { Sequelize } from 'sequelize';
 import { initOrder } from './order';
 import { initUser } from './user';
 
-// const sequelize = new Sequelize('sequelize', 'root', 'pace-weekday-calves', {
-//   dialect: 'mysql',
-//   define: {
-//     freezeTableName: true,
-//     timestamps: false,
-//   },
-// });
 const sequelize = new Sequelize({
   dialect: 'sqlite',
   storage: './database.sqlite3',
