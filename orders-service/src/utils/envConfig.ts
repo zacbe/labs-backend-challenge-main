@@ -1,15 +1,15 @@
 import dotenv from 'dotenv';
-import { cleanEnv, host, port, str, testOnly } from 'envalid';
+import { cleanEnv, host, port, str } from 'envalid';
 
 dotenv.config();
 
 export const env = cleanEnv(process.env, {
   // General
-  NODE_ENV: str({ devDefault: testOnly('test'), choices: ['development', 'production', 'test'] }),
-  HOST: host({ devDefault: testOnly('localhost') }),
-  PORT: port({ devDefault: testOnly(8081) }),
-  CORS_ORIGIN: str({ devDefault: testOnly('http://localhost:8081') }),
-  EVENT_SOURCE_SERVICE_HOST: str({ devDefault: testOnly('http://localhost:8081/v1/api/orders') }),
+  NODE_ENV: str({ choices: ['development', 'production', 'test'] }),
+  HOST: host({ default: 'localhost' }),
+  PORT: port({ default: 8081 }),
+  CORS_ORIGIN: str({ default: 'http://localhost:8081' }),
+  EVENT_SOURCE_SERVICE_HOST: str({ default: 'http://localhost:8081/v1/api/orders' }),
 
   // Contact Service
   CONTACTS_SERVICE_HOST: str({ desc: 'Contact service host' }),
