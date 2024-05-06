@@ -8,11 +8,16 @@ const server = app.listen(env.PORT, () => {
 
 const onCloseSignal = () => {
   console.info('sigint received, shutting down');
+
   server.close(() => {
-    console.info('server closed');
-    process.exit();
+    console.info('HTTP server closed');
+    process.exit(0);
   });
-  setTimeout(() => process.exit(1), 10000).unref(); // Force shutdown after 10s
+
+  setTimeout(() => {
+    console.warn('Forcing shutdown due to timeout');
+    process.exit(1);
+  }, 10000).unref();
 };
 
 process.on('SIGINT', onCloseSignal);
