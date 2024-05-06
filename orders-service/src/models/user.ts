@@ -7,7 +7,7 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
   declare houseNumber: string;
   declare streetAddress: string;
   declare city: string;
-  declare county: string;
+  declare country: string;
   declare zip: string;
   declare synced: boolean;
   declare extensionFields: string;
@@ -35,7 +35,7 @@ export function initUser(sequelize: Sequelize): typeof User {
       city: {
         type: DataTypes.TEXT,
       },
-      county: {
+      country: {
         type: DataTypes.TEXT,
       },
       zip: {

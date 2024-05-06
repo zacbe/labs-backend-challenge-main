@@ -37,8 +37,24 @@ async function insertOrder(body: OrderInput, models: Models): Promise<typeof Ord
 }
 
 async function findOrders(models: Models): Promise<Array<typeof Order>> {
-  const { Order } = models;
-  const orders = await Order.findAll();
+  const { Order, User } = models;
+  const orders = await Order.findAll({
+    attributes: ['id', 'description'],
+    include: {
+      model: User,
+      attribures: [
+        'firstName',
+        'lastName',
+        'houseNumber',
+        'streetAddress',
+        'city',
+        'zip',
+        'country',
+        'synced',
+        'extensionFields',
+      ],
+    },
+  });
   return orders.map((order: typeof Order) => order.toJSON());
 }
 
@@ -56,7 +72,7 @@ async function findOrderById(id: string, models: Models): Promise<typeof Order |
           'streetAddress',
           'city',
           'zip',
-          'county',
+          'country',
           'synced',
           'extensionFields',
         ],
