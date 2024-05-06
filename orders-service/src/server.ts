@@ -7,6 +7,7 @@ import swaggerFile from '../docs/swagger-output.json';
 import { orderRouter } from './api/v1/routes';
 import { consumer, startKafkaConsumer, topics } from './kafka/consumers';
 import { EventHandlersMap } from './kafka/event-handlers';
+import { connectProducer } from './kafka/producers';
 import { errorHandler } from './middleware';
 import { sequelize } from './models';
 import { env } from './utils/envConfig';
@@ -18,6 +19,10 @@ import { env } from './utils/envConfig';
   // Start Kafka consumer
   await startKafkaConsumer(consumer, topics, EventHandlersMap);
   console.log('Kafka consumer started');
+
+  // Connect the Kafka producer once
+  await connectProducer();
+  console.log('Kafka producer started');
 })();
 
 const corsOptions = {
