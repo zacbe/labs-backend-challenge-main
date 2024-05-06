@@ -1,4 +1,4 @@
-import app from './server';
+import { app } from './server';
 import { env } from './utils/envConfig';
 
 const server = app.listen(env.PORT, () => {

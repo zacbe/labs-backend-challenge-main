@@ -5,18 +5,25 @@ import swaggerUi from 'swagger-ui-express';
 
 import swaggerFile from '../docs/swagger-output.json';
 import { orderRouter } from './api/v1/routes';
+import { consumer, startKafkaConsumer, topics } from './kafka/consumers';
+import { EventHandlersMap } from './kafka/event-handlers';
 import { errorHandler } from './middleware';
 import { sequelize } from './models';
 import { env } from './utils/envConfig';
+
+(async () => {
+  // initialize the squelize connection
+  await sequelize.sync({ alter: true, force: false });
+
+  // Start Kafka consumer
+  await startKafkaConsumer(consumer, topics, EventHandlersMap);
+  console.log('Kafka consumer started');
+})();
 
 const corsOptions = {
   origin: env.CORS_ORIGIN,
   credentials: true,
 };
-// initialize the squelize connection
-(async () => {
-  await sequelize.sync({ alter: true, force: false });
-})();
 
 const app: Express = express();
 
@@ -49,4 +56,4 @@ app.get('/', (_req: Request, res: Response) => {
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use(errorHandler);
 
-export default app;
+export { app };
