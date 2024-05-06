@@ -20,6 +20,7 @@
   "dependencies": {
     "axios": "^1.6.8",
     "body-parser": "^1.20.2",
+    "cloudevents": "^8.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "envalid": "^8.0.0",
@@ -27,6 +28,7 @@
     "express-async-router": "^0.1.15",
     "http-errors": "^2.0.0",
     "http-status-codes": "^2.3.0",
+    "kafkajs": "^2.2.4",
     "mysql2": "^3.9.7",
     "pino-http": "^9.0.0",
     "sequelize": "^6.37.3",
