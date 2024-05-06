@@ -1,8 +1,8 @@
 import { orderUpdatedEvent, serializeCloudEvent } from '../../utils/cloudEvents';
+import config from '../../utils/kafkaConfig';
 import { sendMessage } from '../producers';
 
-// TODO: source from config.ts
-const TOPIC = 'order-events-changed';
+const TOPIC = config.topicOrderChanged;
 
 const handleOrderUpdatedEvents = async (event: any) => {
   try {

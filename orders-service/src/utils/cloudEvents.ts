@@ -3,7 +3,7 @@ import { CloudEvent } from 'cloudevents';
 import { env } from './envConfig';
 
 function composeCloudEvent(type: string, data: any) {
-  const source = env.EVENT_SOURCE;
+  const source = env.EVENT_SOURCE_SERVICE_HOST;
   const ce = new CloudEvent({ type, source, data, datacontenttype: 'application/json' });
   return ce;
 }

@@ -1,10 +1,10 @@
 import { Kafka, logLevel, Producer } from 'kafkajs';
 
-// TODO: source from config.ts
+import config from '../../utils/kafkaConfig';
 
 const kafka = new Kafka({
-  clientId: 'my-kafka-producer',
-  brokers: ['localhost:9093'],
+  clientId: config.clientId,
+  brokers: [config.bootStrapServers],
   logLevel: logLevel.INFO,
 });
 

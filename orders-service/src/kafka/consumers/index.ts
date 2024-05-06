@@ -1,7 +1,9 @@
 import { EachMessagePayload, Kafka } from 'kafkajs';
 
-const consumer = createKafkaConsumer('client-id', ['localhost:9093'], 'consumer-group');
-const topics = ['personevents-changed', 'personevents-created', 'personevents-deleted'];
+import config from '../../utils/kafkaConfig';
+
+const consumer = createKafkaConsumer(config.clientId, [config.bootStrapServers], config.groupId);
+const topics = [config.topicPersonChanged, config.topicPersonCreated, config.topicPersonDeleted];
 
 function createKafkaConsumer(clientId: string, brokers: string[], groupId: string) {
   const kafka = new Kafka({ clientId, brokers });

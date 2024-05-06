@@ -1,8 +1,8 @@
 import { orderDeletedEvent, serializeCloudEvent } from '../../utils/cloudEvents';
+import config from '../../utils/kafkaConfig';
 import { sendMessage } from '../producers';
 
-// TODO: source from config.ts
-const TOPIC = 'order-events-deleted';
+const TOPIC = config.topicOrderDeleted;
 
 const handleOrderDeletedEvents = async (event: any) => {
   const { orderid } = event;
