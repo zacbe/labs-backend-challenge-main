@@ -3,4 +3,3 @@ node_modules
 .DS_STORE
 dist
 .env
-database.sqlite3
